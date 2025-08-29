@@ -1,4 +1,5 @@
 import { connectDB } from './src/config/db.js'
+import userRouter from './src/users/userRoute.js'
 import express from 'express' // importing a express server and saving in a variable
 
 const app = express() // calling a new instance of an express server and assigned the instance to a const 'app' object which we will use to configure server, assign routes and more. This the central point of the backend
@@ -21,10 +22,11 @@ const myLogger = (req,res,next) => {
 app.get('/',(req,res) => {
   res.send('Hello World!')
 })
+app.use('/api/users',userRouter)
 // app.post()
-app.post('/api/users',myLogger,(req,res) =>{
+app.post('/api/users',(req,res) =>{
     console.log('body',req.body) 
-    res.json(req.body)
+    res.json({})
 })
 
 const PORT = process.env.PORT || 3000 // defining port at which the server will run
